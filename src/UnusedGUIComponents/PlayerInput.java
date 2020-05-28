@@ -1,3 +1,5 @@
+package UnusedGUIComponents;
+
 import javax.swing.*;
 
 public class PlayerInput {

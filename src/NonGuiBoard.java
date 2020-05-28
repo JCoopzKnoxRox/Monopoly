@@ -91,11 +91,11 @@ public class NonGuiBoard {
         CommunityTreasureDeck communityTreasure = new CommunityTreasureDeck();
         Scanner scan = new Scanner(System.in);
         boolean gameOn = true;
-        ArrayList<String> UserBoard = new ArrayList<>();
-        for(Property p: Board){
-            //System.out.println(p.getName());
-            UserBoard.add(p.getName());
-        }
+//        ArrayList<String> UserBoard = new ArrayList<>();
+//        for(Property p: Board){
+//            //System.out.println(p.getName());
+//            UserBoard.add(p.getName());
+//        }
         Random die = new Random();
         System.out.println("How Many Players? (1-8)");
         int ps = scan.nextInt();
@@ -105,10 +105,10 @@ public class NonGuiBoard {
 
            //System.out.println(p.getName());
         }
-        int curr = 0;
+        int curr = 0; //anchor for player turns
         Scanner boardScan = new Scanner(new File("displayBoard"));
         while(gameOn){
-                checkPlayers();
+                gameOn = checkPlayers();
                 while(boardScan.hasNextLine()){
                     System.out.println(boardScan.nextLine());
                 }
@@ -553,7 +553,8 @@ public class NonGuiBoard {
             System.out.println(p.getName() + "'s Houseable Properties: "+ monopolyProperties);
             return monopolyProperties;
         }
-        public static void checkPlayers(){ //check to see if a player need to be removed from play
+        public static boolean checkPlayers(){ //check to see if a player need to be removed from play
+            boolean endGame = false;
             for(Player p : players){
                 int pPos = 0;
                 int checkSum = p.getMoney();
@@ -567,6 +568,10 @@ public class NonGuiBoard {
                 }
                 pPos++;
             }
+            if(players.size()==1){
+                endGame = true;
+            }
+            return endGame;
         }
 
       }

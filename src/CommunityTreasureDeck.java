@@ -137,8 +137,16 @@ public class CommunityTreasureDeck {
 
     }
     public void draw(Player p){
-        Card card = cardPile.remove(0);
+        if(cardPile.size() == 0){
+            while(discard.size() != 0) {
+                Card card = discard.get(0);
+                cardPile.add(card);
+                discard.remove(0);
+            }
+        }
+        Card card = cardPile.get(0);
         card.action(p);
         discard.add(card);
+        cardPile.remove(0);
     }
 }
